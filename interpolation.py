@@ -103,7 +103,7 @@ def get_nearest_f(A,B,interp_point):
 if __name__ == "__main__":
     test_json = read_json(r"aspects\dtype_aspects.json")
     dtype1 = attribute_to_coords(test_json["Cold"])
-    dtype2 = attribute_to_coords(test_json["Fire"])
+    dtype2 = attribute_to_coords(test_json["Necrotic"])
     print("Cold: ",dtype1)
     print("Necrotic: ",dtype2)
     passed_points,err,F = test_interpolation(dtype1,dtype2)
