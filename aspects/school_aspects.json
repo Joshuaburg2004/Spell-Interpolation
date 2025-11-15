@@ -1,0 +1,8 @@
+{"Abjuration": ["Life","Rigidity","Hope","Light"],
+ "Conjuration": ["Life","Flexibility","Beyond","Potential"], 
+ "Divination": ["Hope","Beyond","Light","Rigidity"], 
+ "Enchantment": ["Potential","Energy","Rigidity","Rigidity"],
+ "Evocation": ["Heat","Movement","Death","Flexibility"],
+ "Illusion": ["Dark","Light","Dark","Hope"],
+ "Necromancy": ["Death","Diminutive","Dark","Beyond"],
+ "Transmutation": ["Flexibility","Potential","Flexibility","Beyond"]}
