@@ -27,7 +27,7 @@ def aspect_to_coords(aspect_str: str)-> np.ndarray:
     else:
         raise KeyError(f"{aspect_str} not in {positives}\n or {negatives}")
 
-def attribute_to_coords(aspect_list: list|np.ndarray) -> np.ndarray:
+def attribute_to_coords(aspect_list: list) -> np.ndarray:
     coords = np.zeros(10)
     for aspect_str in aspect_list:
         coords += aspect_to_coords(aspect_str)
