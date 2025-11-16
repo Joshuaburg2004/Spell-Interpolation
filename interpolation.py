@@ -6,13 +6,13 @@ from tqdm.auto import tqdm
 
 def interpolate(A: np.ndarray,B: np.ndarray,f: float) -> np.ndarray:
     return((1-f)*A + f*B)
-def read_json(json_file) -> dict:
+def read_json(json_file: str) -> dict:
     with open(json_file,"r") as f:
         data = json.load(f)
         f.close()
     return(data)
 
-def aspect_to_coords(aspect_str)-> np.ndarray:
+def aspect_to_coords(aspect_str: str)-> np.ndarray:
     positives = ["Beyond","Heat","Light","Life","Prodigiouss","Energy","Extrospection","Flexibility","Hope","Movement"]
     negatives = ["Within","Cold","Dark","Death","Diminutive","Potential","Introspection","Rigidity","Hopelessness","Stagnency"]
     coords = np.zeros(len(positives))
@@ -27,13 +27,13 @@ def aspect_to_coords(aspect_str)-> np.ndarray:
     else:
         raise KeyError(f"{aspect_str} not in {positives}\n or {negatives}")
 
-def attribute_to_coords(aspect_list) -> np.ndarray:
+def attribute_to_coords(aspect_list: list|np.ndarray) -> np.ndarray:
     coords = np.zeros(10)
     for aspect_str in aspect_list:
         coords += aspect_to_coords(aspect_str)
     return(coords)
 
-def get_all_attribute_coords(json_file):
+def get_all_attribute_coords(json_file: str):
     test_json = read_json(json_file)
     att_keys = test_json.keys()
     att_coords = []
@@ -41,7 +41,7 @@ def get_all_attribute_coords(json_file):
         att_coords.append(attribute_to_coords(test_json[ak]))
     return(att_coords,att_keys)
 
-def test_interpolation(coord0,coord1,inter_density = 1000,threshold = 0.25):
+def test_interpolation(coord0: np.ndarray, coord1:np.ndarray,inter_density: int = 1000, threshold: float = 0.25):
     passed_points = []
     err = []
     F = []
@@ -63,7 +63,7 @@ def test_interpolation(coord0,coord1,inter_density = 1000,threshold = 0.25):
     return(passed_points[1:-1],err[1:-1],F[1:-1])
 
 
-def get_nearest_f(A,B,interp_point):
+def get_nearest_f(A: np.ndarray, B: np.ndarray, interp_point: np.ndarray) -> tuple[np.floating, float]:
     # Mostly based on https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line
     # section "Vector Formulation"
     
@@ -96,8 +96,9 @@ def get_nearest_f(A,B,interp_point):
     non_zero_CA = np.where(C-A != 0)
 
     #get f of minimum D
-    f = np.mean(np.abs((C-A)[non_zero_CA]/(B-A)[non_zero_CA])) #should be the same for all though, this is not like...totally correct
-                                        # but should be correct enough for this
+    f = np.mean(np.abs((C-A)[non_zero_CA]/(B-A)[non_zero_CA])) 
+    #should be the same for all though, this is not like...totally correct
+    # but should be correct enough for this
     return(D,f)
     
 if __name__ == "__main__":
